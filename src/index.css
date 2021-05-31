@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 * {
   font-family: "Verdana", cursive, sans-serif;
@@ -38,7 +39,7 @@ body {
 }
 
 .question-section {
-  width: 100%;
+  width: 400px;
   position: relative;
 }
 
@@ -51,6 +52,7 @@ body {
 }
 
 .question-text {
+  font-size: x-large;
   margin-bottom: 12px;
 }
 
@@ -83,6 +85,7 @@ button {
   align-items: center;
   border: 5px solid #234668;
   cursor: pointer;
+  justify-content: center;
 }
 
 .correct {
