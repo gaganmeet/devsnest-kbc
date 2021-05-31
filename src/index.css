@@ -91,7 +91,8 @@ button {
   background-color: #2f922f;
 }
 
-.incorrect {
+.quit {
+  margin-top: 2em;
   background-color: #ff3333;
 }
 

@@ -22,7 +22,7 @@ function Question({
       if (nextQuestion < QUESTIONS.length) {
         setQuestion(nextQuestion);
       } else {
-        setShowScore(true);
+        setShowScore(3);
       }
     } else {
       setShowScore(3);
@@ -33,6 +33,7 @@ function Question({
     <div>
       {QUESTIONS[question].options.map((answerOption, idx) => (
         <button
+          key={idx}
           onClick={() =>
             handleAnswerOptionClick(idx, QUESTIONS[question].answer)
           }

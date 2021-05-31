@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
 import Question from "./Question";
 function App() {
@@ -108,14 +108,16 @@ function App() {
       money: 10000000,
     },
   ];
+  const [questionList, setQuestionList] = useState(QUESTIONS);
   const [question, setQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(0);
   const [finalScore, setFinalScore] = useState(0);
   const [lifeLine, setLifeLine] = useState(true);
   const handleLifeline = (question) => {
-    let correct = QUESTIONS[question].answer;
-    let options = QUESTIONS[question].options;
+    let q = questionList;
+    let correct = q[question].answer;
+    let options = q[question].options;
     let i = 0;
     for (i = 0; i < options.length && i !== correct; i++) {
       break;
@@ -123,7 +125,8 @@ function App() {
     let newOptions = [];
     newOptions.push(options[i]);
     newOptions.push(options[correct]);
-    QUESTIONS[question].options = newOptions;
+    q[question].options = newOptions;
+    setQuestionList(q);
     setLifeLine(false);
     setShowScore(1);
   };
@@ -145,35 +148,29 @@ function App() {
             <div className="question-text">{QUESTIONS[question].name}</div>
           </div>
           <div className="answer-section">
+            <Question
+              QUESTIONS={questionList}
+              question={question}
+              setFinalScore={setFinalScore}
+              setQuestion={setQuestion}
+              setScore={setScore}
+              score={score}
+              setShowScore={setShowScore}
+            />
             {lifeLine ? (
               <>
-                <Question
-                  QUESTIONS={QUESTIONS}
-                  question={question}
-                  setFinalScore={setFinalScore}
-                  setQuestion={setQuestion}
-                  setScore={setScore}
-                  score={score}
-                  setShowScore={setShowScore}
-                />
                 <h2>Lifeline</h2>
                 <button onClick={() => handleLifeline(question)}>50-50</button>
               </>
             ) : (
               <>
-                <Question
-                  QUESTIONS={QUESTIONS}
-                  question={question}
-                  setFinalScore={setFinalScore}
-                  setQuestion={setQuestion}
-                  setScore={setScore}
-                  score={score}
-                  setShowScore={setShowScore}
-                />
                 <h2>No lifeline</h2>
               </>
             )}
           </div>
+          <button className="quit" onClick={() => setShowScore(3)}>
+            QUIT
+          </button>
         </>
       )}
     </div>
