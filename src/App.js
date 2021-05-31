@@ -108,6 +108,7 @@ function App() {
       money: 10000000,
     },
   ];
+  const qcopy = QUESTIONS;
   const [questionList, setQuestionList] = useState(QUESTIONS);
   const [question, setQuestion] = useState(0);
   const [score, setScore] = useState(0);
@@ -130,6 +131,14 @@ function App() {
     setLifeLine(false);
     setShowScore(1);
   };
+  const handlePlayAgain = () => {
+    setQuestionList(qcopy);
+    setQuestion(0);
+    setScore(0);
+    setShowScore(0);
+    setFinalScore(0);
+    setLifeLine(true);
+  };
   return (
     <div className="App">
       {question === 0 && !showScore ? (
@@ -138,7 +147,12 @@ function App() {
         <h1>Round {question + 1}</h1>
       )}
       {showScore === 3 ? (
-        <div className="score-section">You won {finalScore}</div>
+        <>
+          <div className="score-section">You won {finalScore}</div>
+          <button className="quit" onClick={() => handlePlayAgain()}>
+            Play Again
+          </button>
+        </>
       ) : (
         <>
           <div className="question-section">
